@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zasady ochrany soukromi | Shopter</title>
+  <meta name="description" content="Zásady ochrany soukromí aplikace Shopter." />
+  <style>
+    :root {
+      --bg: #fff9f2;
+      --card: #ffffff;
+      --ink: #2b241d;
+      --muted: #6b5b4e;
+      --line: #ecdccf;
+      --accent: #d86b2f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, #ffe7d2 0, transparent 38%),
+        radial-gradient(circle at 100% 100%, #ffeede 0, transparent 40%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(960px, 92vw);
+      margin: 0 auto;
+      padding: 34px 0 54px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 14px 34px rgba(59, 40, 20, 0.08);
+      padding: 26px 24px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .back {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 3.5vw, 36px);
+      line-height: 1.12;
+    }
+
+    .updated {
+      margin: 0 0 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    h2 {
+      margin: 18px 0 10px;
+      font-size: 19px;
+      color: #3b2a1d;
+    }
+
+    h3 {
+      margin: 14px 0 8px;
+      font-size: 16px;
+      color: #4a3727;
+    }
+
+    p {
+      margin: 0 0 10px;
+      line-height: 1.62;
+      color: #3f3228;
+    }
+
+    ul {
+      margin: 0 0 12px 18px;
+      padding: 0;
+      color: #3f3228;
+      line-height: 1.62;
+    }
+
+    li { margin-bottom: 4px; }
+
+    .mail {
+      font-weight: 700;
+      color: #7f3f1f;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" aria-label="Zásady ochrany soukromí">
+      <div class="topbar">
+        <a class="back" href="/shopter-2-web/">&larr; Zpet na podporu</a>
+      </div>
+
+      <h1>Zásady ochrany soukromí – Shopter</h1>
+      <p class="updated">Poslední aktualizace: 8. dubna 2026</p>
+
+      <p>Tyto zásady ochrany soukromí popisují, jak aplikace Shopter (balíček Android: <code>com.koramon.shopter2</code>) zpracovává data uživatelů.</p>
+
+      <h2>1. Správce a kontakt</h2>
+      <ul>
+        <li>Tvůrce: <strong>KoraMon</strong></li>
+        <li>Studio: <strong>KoraMon Apps</strong></li>
+        <li>Kontaktní e-mail: <span class="mail">koramon.apps@proton.me</span></li>
+      </ul>
+
+      <h2>2. Jaká data aplikace zpracovává</h2>
+      <h3>2.1 Data, která zadává uživatel</h3>
+      <p>Aplikace může ukládat informace, které do ní uživatel vědomě vloží:</p>
+      <ul>
+        <li>názvy položek wishlistu,</li>
+        <li>ceny, měnu, poznámky,</li>
+        <li>odkazy (URL),</li>
+        <li>kategorie a štítky,</li>
+        <li>obrázky položek (pokud je uživatel přidá).</li>
+      </ul>
+
+      <h3>2.2 Technická a provozní data aplikace</h3>
+      <p>Aplikace ukládá lokálně v zařízení provozní údaje potřebné pro funkčnost, například:</p>
+      <ul>
+        <li>nastavení aplikace,</li>
+        <li>historii některých akcí v aplikaci,</li>
+        <li>preference notifikací a watch/recheck funkcí.</li>
+      </ul>
+
+      <h3>2.3 Oprávnění zařízení</h3>
+      <p>Aplikace může používat tato oprávnění (podle funkcí, které uživatel využije):</p>
+      <ul>
+        <li>notifikace (<code>POST_NOTIFICATIONS</code>) pro upozornění na změny cen/dostupnosti,</li>
+        <li>fotografie/soubory (výběr obrázků, import/export a zálohy),</li>
+        <li>případně kamera/fotogalerie podle zvoleného toku vložení obrázku.</li>
+      </ul>
+
+      <h2>3. WebView a práce s webovým obsahem</h2>
+      <p>Pokud uživatel otevře odkaz v interním webovém prohlížeči, aplikace načítá obsah cílové stránky za účelem zobrazení stránky a extrakce relevantních údajů o produktu (např. název/cena), pokud uživatel tuto akci vyvolá.</p>
+      <p>Tyto údaje jsou používány jen pro funkce aplikace Shopter.</p>
+
+      <h2>4. Cloud záloha (volitelná funkce)</h2>
+      <p>Shopter nabízí volitelnou cloud zálohu/obnovu přes Google účet.</p>
+      <ul>
+        <li>Přihlášení probíhá přes Google Sign-In.</li>
+        <li>Při využití cloud zálohy jsou data ukládána do Google Drive účtu uživatele.</li>
+        <li>Tato funkce je aktivní pouze tehdy, když ji uživatel výslovně použije.</li>
+      </ul>
+
+      <h2>5. Sdílení dat třetím stranám</h2>
+      <ul>
+        <li>Data uživatele neprodáváme.</li>
+        <li>Data nesdílíme pro reklamní profilování.</li>
+        <li>Ke zpracování mohou být použity služby třetích stran pouze v rozsahu nutném pro funkce aplikace, zejména Google Sign-In a Google Drive API (pokud uživatel použije cloud zálohu) a cílové webové stránky otevřené uživatelem ve WebView.</li>
+      </ul>
+
+      <h2>6. Ukládání a doba uchování</h2>
+      <ul>
+        <li>Většina dat je ukládána lokálně v zařízení uživatele.</li>
+        <li>Data jsou uchována do smazání uživatelem nebo do odinstalace aplikace.</li>
+        <li>Cloud zálohy v Google Drive jsou uchovány, dokud je uživatel neodstraní ze svého Google účtu.</li>
+      </ul>
+
+      <h2>7. Bezpečnost</h2>
+      <p>Používáme přiměřená technická opatření k ochraně dat v rámci možností mobilní aplikace (např. bezpečné úložiště pro citlivé údaje, systémová oprávnění, omezení přístupu).</p>
+
+      <h2>8. Práva uživatele</h2>
+      <p>Uživatel může:</p>
+      <ul>
+        <li>upravit nebo smazat data přímo v aplikaci,</li>
+        <li>odinstalovat aplikaci a odstranit lokální data,</li>
+        <li>zrušit oprávnění v nastavení zařízení,</li>
+        <li>odstranit cloud zálohy ze svého Google Drive.</li>
+      </ul>
+      <p>V případě dotazů nebo žádostí ohledně soukromí nás kontaktujte na: <span class="mail">koramon.apps@proton.me</span>.</p>
+
+      <h2>9. Děti</h2>
+      <p>Aplikace není cílená na děti mladší 13 let. Vědomě neshromažďujeme osobní údaje dětí.</p>
+
+      <h2>10. Změny těchto zásad</h2>
+      <p>Tyto zásady můžeme průběžně aktualizovat. Nová verze bude zveřejněna na stejné URL stránce a s novým datem aktualizace.</p>
+    </section>
+  </main>
+</body>
+</html>
