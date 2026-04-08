@@ -1,38 +1,248 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopter 2 - Donation Page</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { background-color: #4CAF50; color: white; padding: 15px; text-align: center; }
-        .container { padding: 20px; }
-        .donation-section { background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin-top: 20px; }
-        .donation-section h2 { color: #333; }
-        footer { text-align: center; padding: 10px; font-size: 0.9em; color: #777; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Podpora autora | Shopter</title>
+  <meta name="description" content="Podpora autora aplikace Shopter přes IBAN a QR platbu." />
+  <style>
+    :root {
+      --bg: #fff9f2;
+      --card: #ffffff;
+      --ink: #2b241d;
+      --muted: #6b5b4e;
+      --line: #ecdccf;
+      --accent: #d86b2f;
+      --accent-soft: #fff1e7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, #ffe7d2 0, transparent 38%),
+        radial-gradient(circle at 100% 100%, #ffeede 0, transparent 40%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(940px, 92vw);
+      margin: 0 auto;
+      padding: 42px 0 54px;
+    }
+
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 16px 42px rgba(59, 40, 20, 0.10);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 0;
+    }
+
+    .hero-media {
+      min-height: 300px;
+      background: #f8efe7;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-copy {
+      padding: 32px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-self: flex-start;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #f5caa9;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 3.7vw, 40px);
+      line-height: 1.12;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 42ch;
+    }
+
+    .support {
+      margin-top: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 14px 34px rgba(59, 40, 20, 0.08);
+      padding: 24px;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 250px;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .label {
+      margin: 0 0 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9a7c66;
+      font-weight: 700;
+    }
+
+    .iban {
+      margin: 0;
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      word-break: break-word;
+    }
+
+    .hint {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .copy-btn {
+      margin-top: 14px;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      padding: 10px 14px;
+      border-radius: 11px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    .qr-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .qr-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      display: block;
+      border-radius: 10px;
+      background: white;
+    }
+
+    .qr-label {
+      margin: 10px 0 2px;
+      font-size: 13px;
+      color: #7a6251;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 16px;
+      color: #8a7667;
+      font-size: 12px;
+    }
+
+    @media (max-width: 820px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-media { min-height: 260px; }
+      .support-grid { grid-template-columns: 1fr; }
+      .wrap { padding-top: 28px; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Shopter 2</h1>
-        <p>Helping you shop smarter</p>
-    </header>
-    <div class="container">
-        <h2>About Us</h2>
-        <p>Shopter 2 is dedicated to providing the best shopping experience. We pride ourselves on our extensive selection and excellent customer service.</p>
-        <div class="donation-section">
-            <h2>Support Us</h2>
-            <p>To continue our mission, we appreciate any support you can give. If you would like to make a donation, please use the following details:</p>
-            <p><strong>IBAN:</strong> CZ2520100000002601393363</p>
-            <p><strong>QR Code Reference:</strong> [Insert QR Code Here]</p>
-            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, React</p>
-            <h3>Personal Message</h3>
-            <p>Dear supporters,\nThank you for considering supporting us. Your contributions make a significant difference and help us continue our work.\nBest regards,\nMichal Neubauer</p>
+  <main class="wrap">
+    <section class="hero" aria-label="Podpora autora Shopteru">
+      <div class="hero-grid">
+        <div class="hero-media">
+          <img src="assets/michal-octopus.jpeg" alt="Autor Shopteru s maskotem a kávou" />
         </div>
-    </div>
+        <div class="hero-copy">
+          <span class="badge">Podpora autora</span>
+          <h1>Každé kafe pomáhá Shopteru růst.</h1>
+          <p class="lead">
+            Pokud ti Shopter dělá radost a šetří čas, můžeš podpořit jeho další vývoj.
+            Díky za každou podporu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="support" aria-label="Platební informace">
+      <div class="support-grid">
+        <div>
+          <p class="label">IBAN</p>
+          <p class="iban" id="iban-value">CZ2520100000002601393363</p>
+          <button class="copy-btn" type="button" onclick="copyIban()">Zkopírovat IBAN</button>
+          <p class="hint">
+            Poznámka k QR platbě: funguje pouze v bankovních aplikacích v České republice.
+          </p>
+        </div>
+        <div class="qr-card">
+          <img src="assets/qr-platba-cz.png" alt="QR platba" />
+          <p class="qr-label">QR platba</p>
+        </div>
+      </div>
+    </section>
+
     <footer>
-        <p>&copy; 2026 Shopter 2. All rights reserved.</p>
+      <p>&copy; 2026 Shopter • Děkuju za podporu</p>
     </footer>
+  </main>
+
+  <script>
+    async function copyIban() {
+      const iban = document.getElementById('iban-value').textContent.trim();
+      try {
+        await navigator.clipboard.writeText(iban);
+        alert('IBAN zkopírován. Děkuju!');
+      } catch (_) {
+        alert('Kopírování se nepovedlo, prosím označ IBAN ručně.');
+      }
+    }
+  </script>
 </body>
 </html>
