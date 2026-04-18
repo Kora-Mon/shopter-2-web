@@ -195,15 +195,15 @@
 </head>
 <body>
   <main class="wrap">
-    <section class="hero" aria-label="Podpora autora Shopteru">
+    <section class="hero" aria-label="Podpora autora Shopteru" id="hero-section">
       <div class="hero-grid">
         <div class="hero-media">
-          <img src="assets/michal-octopus.png" alt="Autor Shopteru s maskotem a kávou" />
+          <img src="assets/michal-octopus.png" alt="Autor Shopteru s maskotem a kávou" id="hero-image" />
         </div>
         <div class="hero-copy">
-          <span class="badge">Podpora autora</span>
-          <h1>Každé kafe pomáhá Shopteru růst.</h1>
-          <p class="lead">
+          <span class="badge" id="badge-text">Podpora autora</span>
+          <h1 id="hero-title">Každé kafe pomáhá Shopteru růst.</h1>
+          <p class="lead" id="hero-lead">
             Pokud ti Shopter dělá radost a šetří čas, můžeš podpořit jeho další vývoj.
             Díky za každou podporu.
           </p>
@@ -211,39 +211,120 @@
       </div>
     </section>
 
-    <section class="support" aria-label="Platební informace">
+    <section class="support" aria-label="Platební informace" id="support-section">
       <div class="support-grid">
         <div>
-          <p class="label">IBAN</p>
+          <p class="label" id="iban-label">IBAN</p>
           <p class="iban" id="iban-value">CZ2520100000002601393363</p>
-          <button class="copy-btn" type="button" onclick="copyIban()">Zkopírovat IBAN</button>
-          <p class="hint">
+          <button class="copy-btn" type="button" onclick="copyIban()" id="copy-button">Zkopírovat IBAN</button>
+          <p class="hint" id="iban-hint">
             Poznámka k QR platbě: funguje pouze v bankovních aplikacích v České republice.
           </p>
         </div>
         <div class="qr-card">
-          <img src="assets/qr-platba-cz.png" alt="QR platba" />
-          <p class="qr-label">QR platba</p>
+          <img src="assets/qr-platba-cz.png" alt="QR platba" id="qr-image" />
+          <p class="qr-label" id="qr-label">QR platba</p>
         </div>
       </div>
     </section>
 
     <footer>
-      <p>&copy; 2026 Shopter • Děkuju za podporu</p>
-      <p><a href="/shopter-2-web/privacy-policy/" style="color:#8a5a3b;">Zásady ochrany soukromí</a></p>
+      <p id="footer-copy">&copy; 2026 Shopter • Děkuju za podporu</p>
+      <p><a href="/shopter-2-web/privacy-policy/" style="color:#8a5a3b;" id="privacy-link">Zásady ochrany soukromí</a></p>
     </footer>
   </main>
 
   <script>
+    const translations = {
+      cs: {
+        lang: 'cs',
+        title: 'Podpora autora | Shopter',
+        description: 'Podpora autora aplikace Shopter přes IBAN a QR platbu.',
+        heroAria: 'Podpora autora Shopteru',
+        heroImageAlt: 'Autor Shopteru s maskotem a kávou',
+        badge: 'Podpora autora',
+        heroTitle: 'Každé kafe pomáhá Shopteru růst.',
+        heroLead: 'Pokud ti Shopter dělá radost a šetří čas, můžeš podpořit jeho další vývoj. Díky za každou podporu.',
+        supportAria: 'Platební informace',
+        ibanLabel: 'IBAN',
+        copyButton: 'Zkopírovat IBAN',
+        ibanHint: 'Poznámka k QR platbě: funguje pouze v bankovních aplikacích v České republice.',
+        qrAlt: 'QR platba',
+        qrLabel: 'QR platba',
+        footer: '&copy; 2026 Shopter • Děkuju za podporu',
+        privacy: 'Zásady ochrany soukromí',
+        copied: 'IBAN zkopírován. Děkuju!',
+        copyFailed: 'Kopírování se nepovedlo, prosím označ IBAN ručně.'
+      },
+      en: {
+        lang: 'en',
+        title: 'Support the creator | Shopter',
+        description: 'Support the creator of Shopter via IBAN and QR payment.',
+        heroAria: 'Support the creator of Shopter',
+        heroImageAlt: 'Shopter creator with mascot and coffee',
+        badge: 'Support the creator',
+        heroTitle: 'Every coffee helps Shopter grow.',
+        heroLead: 'If Shopter saves you time and helps you, you can support its future development. Thanks for every bit of support.',
+        supportAria: 'Payment details',
+        ibanLabel: 'IBAN',
+        copyButton: 'Copy IBAN',
+        ibanHint: 'QR payment works only in Czech banking apps. For international support, please use the IBAN above.',
+        qrAlt: 'QR payment for Czech banking apps',
+        qrLabel: 'QR payment (CZ only)',
+        footer: '&copy; 2026 Shopter • Thank you for your support',
+        privacy: 'Privacy policy',
+        copied: 'IBAN copied. Thank you!',
+        copyFailed: 'Copy failed. Please select the IBAN manually.'
+      }
+    };
+
+    function resolveLanguage() {
+      const params = new URLSearchParams(window.location.search);
+      const explicit = (params.get('lang') || '').trim().toLowerCase();
+      if (explicit === 'en' || explicit === 'cs') return explicit;
+
+      const browser = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      return browser.startsWith('en') ? 'en' : 'cs';
+    }
+
+    function applyTranslations() {
+      const lang = resolveLanguage();
+      const t = translations[lang] || translations.cs;
+
+      document.documentElement.lang = t.lang;
+      document.title = t.title;
+
+      const description = document.querySelector('meta[name="description"]');
+      if (description) description.setAttribute('content', t.description);
+
+      document.getElementById('hero-section').setAttribute('aria-label', t.heroAria);
+      document.getElementById('hero-image').setAttribute('alt', t.heroImageAlt);
+      document.getElementById('badge-text').textContent = t.badge;
+      document.getElementById('hero-title').textContent = t.heroTitle;
+      document.getElementById('hero-lead').textContent = t.heroLead;
+      document.getElementById('support-section').setAttribute('aria-label', t.supportAria);
+      document.getElementById('iban-label').textContent = t.ibanLabel;
+      document.getElementById('copy-button').textContent = t.copyButton;
+      document.getElementById('iban-hint').textContent = t.ibanHint;
+      document.getElementById('qr-image').setAttribute('alt', t.qrAlt);
+      document.getElementById('qr-label').textContent = t.qrLabel;
+      document.getElementById('footer-copy').innerHTML = t.footer;
+      document.getElementById('privacy-link').textContent = t.privacy;
+    }
+
     async function copyIban() {
+      const lang = resolveLanguage();
+      const t = translations[lang] || translations.cs;
       const iban = document.getElementById('iban-value').textContent.trim();
       try {
         await navigator.clipboard.writeText(iban);
-        alert('IBAN zkopírován. Děkuju!');
+        alert(t.copied);
       } catch (_) {
-        alert('Kopírování se nepovedlo, prosím označ IBAN ručně.');
+        alert(t.copyFailed);
       }
     }
+
+    applyTranslations();
   </script>
 </body>
 </html>
