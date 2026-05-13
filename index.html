@@ -309,7 +309,14 @@
       document.getElementById('qr-image').setAttribute('alt', t.qrAlt);
       document.getElementById('qr-label').textContent = t.qrLabel;
       document.getElementById('footer-copy').innerHTML = t.footer;
-      document.getElementById('privacy-link').textContent = t.privacy;
+      const privacyLink = document.getElementById('privacy-link');
+      privacyLink.textContent = t.privacy;
+      privacyLink.setAttribute(
+        'href',
+        lang === 'en'
+          ? '/shopter-2-web/privacy-policy/en/'
+          : '/shopter-2-web/privacy-policy/'
+      );
     }
 
     async function copyIban() {
